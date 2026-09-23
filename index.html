@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Demoreel</title>
+    <!-- Nous lierons notre fichier CSS ici à l'étape suivante -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header>
+        <div class="logo">Ines Vanthuyne</div>
+        <nav id="nav-menu">
+            <ul>
+                <!-- La fameuse bulle magique qui va glisser -->
+                <div class="nav-indicator"></div>
+
+                <li><a href="#accueil">Demoreel</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECTION ACCUEIL (HERO) -->
+    <section class="hero">
+        <!-- SECTION ACCUEIL (HERO) -->
+        <section id="accueil" class="hero">
+            <!-- Le contenu de ton accueil : le grand titre, le bouton play, la vidéo de fond... -->
+        </section>
+        <!-- Vidéo d'arrière-plan compressée (tourne en boucle, sans son) -->
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="VideoDemoReel.mp4" type="video/mp4">
+        </video>
+
+        <!-- Contenu superposé -->
+        <div class="hero-content">
+            <h1>Junior Compositing Artist</h1>
+            <!-- Le bouton qui aura l'effet magnétique -->
+            <button id="play-btn" class="magnetic-btn">Lancer la Demoreel</button>
+        </div>
+    </section>
+
+    <!-- MODALE DU LECTEUR VIDÉO (Cachée par défaut) -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <button id="close-btn" class="close-btn">Fermer ✕</button>
+
+            <!-- Structure pour notre lecteur vidéo avec contrôles personnalisés -->
+            <div class="custom-video-container">
+                <video id="main-demoreel">
+                    <source src="VideoDemoReel.mp4" type="video/mp4">
+                </video>
+                <div class="custom-controls">
+                    <button id="play-pause">Play</button>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION PROJETS -->
+    <section id="projets" class="projets-section reveal">
+        <h2>Mes Projets</h2>
+        <div class="grille-projets">
+            <!-- Projet 1 -->
+            <div class="projet-miniature">
+                <img src="https://fr.web.img4.acsta.net/pictures/24/01/26/10/18/5392835.jpg" alt="Projet 1">
+                <h3></h3>
+            </div>
+            <!-- Projet 2 -->
+            <div class="projet-miniature">
+                <img src="https://m.media-amazon.com/images/I/71kya3oiBbL._AC_UF1000,1000_QL80_.jpg" alt="Projet 2">
+                <h3></h3>
+            </div>
+            <div class="projet-miniature">
+                <img src="https://lumiere-a.akamaihd.net/v1/images/p_coco_19736_fd5fa537.jpeg" alt="Projet 1">
+                <h3></h3>
+            </div>
+            <!-- Projet 2 -->
+            <div class="projet-miniature">
+                <img src="https://fr.web.img3.acsta.net/img/7f/e6/7fe6fefcab6e4951dac81cebd7c5e202.jpg" alt="Projet 2">
+                <h3></h3>
+            </div>
+            <div class="projet-miniature">
+                <img src="https://img.magnific.com/vecteurs-libre/prochainement-afficher-arriere-plan-lumiere-mise-au-point_1017-33741.jpg?semt=ais_hybrid&w=740&q=80"
+                    alt="Projet 1">
+                <h3></h3>
+            </div>
+            <!-- Projet 2 -->
+            <div class="projet-miniature">
+                <img src="https://img.magnific.com/vecteurs-libre/prochainement-afficher-arriere-plan-lumiere-mise-au-point_1017-33741.jpg?semt=ais_hybrid&w=740&q=80"
+                    alt="Projet 2">
+                <h3></h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CONTACT (FOOTER) -->
+    <footer id="contact" class="contact-section reveal">
+        <div class="contact-container">
+            <h2>Travaillons ensemble</h2>
+            <p>Disponible pour de nouveaux projets et collaborations.</p>
+
+            <div class="contact-links">
+                <!-- Le lien mailto: ouvrira directement la messagerie du visiteur -->
+                <a href="mailto:ton.email@exemple.com" class="contact-btn">Envoyer un Email</a>
+            </div>
+
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Ines Vanthuyne. Tous droits réservés.</p>
+        </div>
+    </footer>
+    <!-- Nous lierons notre fichier JavaScript ici plus tard -->
+    <script src="script.js"></script>
+</body>
+
+</html>

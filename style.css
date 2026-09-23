@@ -1,0 +1,586 @@
+/* --- VARIABLES & RESET --- */
+:root {
+    /* Un fond presque noir, mais très subtilement teinté de mauve */
+    --bg-color: #0d0b12;
+    /* Un texte blanc légèrement cassé pour ne pas fatiguer les yeux */
+    --text-color: #f4eff7;
+
+    /* Notre dégradé mauve moderne */
+    --gradient-primary: linear-gradient(135deg, #c084fc, #7c3aed);
+    --gradient-hover: linear-gradient(135deg, #d8b4fe, #9333ea);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Active le glissement fluide */
+    scroll-padding-top: 100px;
+    /* Empêche ton menu flottant de cacher le haut des sections */
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- HEADER --- */
+header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1000px;
+    padding: 15px 40px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+
+    /* Effet Liquid Glass façon Apple */
+    border-radius: 50px;
+    background: rgba(20, 15, 30, 0.3);
+    /* Très transparent */
+    backdrop-filter: blur(20px) saturate(160%);
+    /* Flou intense et boost des couleurs */
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    /* Pour Safari */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Le reflet du verre */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    /* Ombre douce pour détacher la bulle */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+header.cache {
+    /* Le -50% garde le menu centré, le -150% le pousse hors de l'écran vers le haut */
+    transform: translate(-50%, -150%);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    /* On réduit un peu le gap pour que la bulle glisse mieux */
+    position: relative;
+    /* Indispensable pour repérer la bulle */
+}
+
+nav a {
+    position: relative;
+    z-index: 2;
+    /* Le texte reste au-dessus de la bulle */
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 20px;
+    /* On donne de l'espace autour du texte pour que la bulle soit jolie */
+    border-radius: 50px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+.nav-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    /* Sera modifié par le JS */
+    border-radius: 50px;
+    background: rgba(192, 132, 252, 0.2);
+    /* Un fond mauve translucide */
+    box-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
+    /* Un léger halo */
+    opacity: 0;
+    /* Invisible quand la souris n'est pas sur le menu */
+    pointer-events: none;
+    /* Pour que la bulle ne bloque pas le clic */
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1;
+    /* Se glisse sous le texte */
+}
+
+/* --- HERO SECTION (Accueil) --- */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -2;
+    object-fit: cover;
+}
+
+/* Le voile assombri sur la vidéo d'arrière-plan */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.magnetic-btn {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    /* On remplace la couleur unie par le dégradé */
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s;
+    display: inline-block;
+}
+
+.magnetic-btn:hover {
+    background: var(--gradient-hover);
+    /* Ajout d'une ombre mauve subtile au survol pour accentuer l'effet lumineux */
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+
+/* --- SECTION PROJETS (Grille et Zoom) --- */
+.projets-section {
+    position: relative;
+    z-index: 2;
+    /* S'assure que la section passe par-dessus la vidéo */
+
+    /* Le secret : on remonte la section sur le bas de l'accueil */
+    margin-top: -100px;
+
+    /* Les angles ronds géants façon application moderne */
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+
+    /* Un fond plein pour cacher la vidéo qui passe en dessous */
+    background-color: var(--bg-color);
+
+    /* Une ombre géante projetée vers le haut pour détacher la plaque */
+    box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.8);
+
+    /* Un liseré lumineux très fin sur le bord supérieur pour le côté premium */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    /* On augmente le padding haut pour que le contenu respire sous cet arrondi */
+    padding: 120px 50px 80px;
+    max-width: 100%;
+    /* S'assure que la plaque touche les bords de l'écran */
+}
+
+.projets-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    /* Cette ligne centre ton titre */
+}
+
+.grille-projets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.projet-miniature {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+
+    /* Le changement clé : on passe sur un format vertical beaucoup plus haut */
+    aspect-ratio: 3 / 4;
+
+    cursor: pointer;
+    background: #111;
+}
+
+.projet-miniature img {
+    width: 100%;
+    height: 100%;
+
+    /* On force l'image à remplir cette nouvelle grande boîte verticale */
+    object-fit: cover;
+    display: block;
+    padding: 0;
+    /* On retire les marges du test précédent */
+
+    filter: brightness(0.8);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
+}
+
+
+
+.projet-miniature h3 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* L'effet au survol ! */
+.projet-miniature:hover img {
+    transform: scale(1.05);
+    filter: brightness(1);
+}
+
+.projet-miniature:hover h3 {
+    opacity: 1;
+}
+
+/* --- MODALE LECTEUR VIDÉO --- */
+.modal {
+    display: none;
+    /* Masqué par défaut, le JS gérera l'affichage */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Classe ajoutée par JS pour afficher la modale */
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.custom-video-container {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 24px;
+    /* Angles beaucoup plus ronds (au lieu de 8px) */
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    /* Ajoute une belle ombre pour détacher le lecteur */
+}
+
+#main-demoreel {
+    width: 100%;
+    display: block;
+}
+
+/* Contrôles personnalisés (à animer avec JS) */
+.custom-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.custom-controls button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.progress-bar-container {
+    flex-grow: 1;
+    height: 8px;
+    /* Un poil plus épaisse pour que l'arrondi se voie bien */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    /* Totalement ronde */
+    cursor: pointer;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-primary);
+    border-radius: 50px;
+    /* Totalement ronde */
+}
+
+
+/* --- SECTION CONTACT (FOOTER) --- */
+.contact-section {
+    position: relative;
+    z-index: 2;
+
+    /* Même logique : on sépare nettement la section avec un fond légèrement différent */
+    background: #08060a;
+
+    /* Arrondis massifs en haut également */
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+
+    /* On la détache de la section projet avec un léger espace inversé si besoin, 
+       ou on la laisse simplement empilée. Ici on l'empile avec une ligne douce. */
+    border-top: 1px solid rgba(192, 132, 252, 0.1);
+    /* Liseré mauve très subtil */
+    padding: 100px 50px 40px;
+    text-align: center;
+}
+
+.contact-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.contact-container p {
+    color: #a0a0a0;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* Bouton Contact avec effet Liquid Glass Mauve */
+.contact-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: transform 0.3s ease, background 0.3s, box-shadow 0.3s;
+
+    background: rgba(192, 132, 252, 0.15);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid rgba(192, 132, 252, 0.4);
+}
+
+.contact-btn:hover {
+    transform: translateY(-5px);
+    /* Léger bond au survol */
+    background: rgba(192, 132, 252, 0.3);
+    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+    /* Halo mauve */
+}
+
+/* Liens des réseaux sociaux */
+.social-links {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #c084fc;
+    /* Devient mauve clair au survol */
+}
+
+/* Copyright en bas de page */
+.footer-bottom {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Classes pour l'animation au défilement */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    /* Décalé de 60px vers le bas au départ */
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+    /* Remonte à sa position normale */
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (Mobiles & Tablettes)
+   ========================================= */
+
+/* --- TABLETTES ET PETITS ÉCRANS (Moins de 768px) --- */
+@media screen and (max-width: 768px) {
+
+    /* Le Header : on réduit les marges et on ajuste la bulle en verre */
+    header {
+        width: 95%;
+        padding: 10px 20px;
+        top: 10px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    nav ul {
+        gap: 15px;
+        /* Rapproche les liens du menu */
+    }
+
+    nav a {
+        font-size: 0.9rem;
+    }
+
+    /* Le Titre : on réduit la taille de la police pour éviter que ça coupe */
+    .hero-content h1 {
+        font-size: 2.8rem;
+        padding: 0 15px;
+    }
+
+    /* Section Projets : on réduit l'espacement global */
+    .projets-section {
+        padding: 60px 20px;
+    }
+
+    .projets-section h2 {
+        font-size: 2rem;
+        text-align: center;
+        /* Plus esthétique centré sur mobile */
+    }
+
+    /* Modale et Vidéo : on ajuste les contrôles et le bouton fermer */
+    .close-btn {
+        top: -30px;
+        /* On le rapproche pour éviter qu'il sorte de l'écran */
+        right: 10px;
+    }
+
+    .custom-controls {
+        width: 95%;
+        bottom: 10px;
+        padding: 10px 15px;
+    }
+
+    /* Ajustements du Footer pour Mobile */
+    .contact-section {
+        padding: 60px 20px 30px;
+    }
+
+    .contact-container h2 {
+        font-size: 2rem;
+    }
+
+    .social-links {
+        flex-direction: column;
+        /* Empile les liens Vimeo, LinkedIn, etc. */
+        gap: 15px;
+    }
+
+    /* Ajustements des grosses sections pour Mobile */
+    .projets-section,
+    .contact-section {
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
+        padding-top: 80px;
+        margin-top: -60px;
+        /* On remonte un peu moins sur mobile */
+    }
+}
+
+/* --- TÉLÉPHONES PORTABLES (Moins de 480px) --- */
+@media screen and (max-width: 480px) {
+
+    /* Le Header : l'écran est très étroit, on empile le logo et les liens */
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+        border-radius: 24px;
+        /* On réduit un peu l'arrondi vu que la bulle est plus haute */
+    }
+
+    /* Le Titre : encore plus petit pour les smartphones */
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    /* Le Bouton Play : on réduit un peu le bouton magnétique */
+    .magnetic-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    /* On s'assure que la grille passe bien sur une seule colonne */
+    .grille-projets {
+        grid-template-columns: 1fr;
+    }
+
+    /* La barre de contrôle de la vidéo sur mobile */
+    .custom-controls {
+        flex-direction: column;
+        /* On met le bouton play au-dessus de la barre de progression */
+        gap: 8px;
+        border-radius: 20px;
+    }
+}
