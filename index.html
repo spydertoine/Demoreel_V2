@@ -7,6 +7,12 @@
     <title>Portfolio - Demoreel</title>
     <!-- Nous lierons notre fichier CSS ici à l'étape suivante -->
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <title>Portfolio - Demoreel</title>
+    <!-- Ajout du Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
 </head>
 
 <body>
@@ -16,12 +22,13 @@
         <div class="logo">Ines Vanthuyne</div>
         <nav id="nav-menu">
             <ul>
-                <!-- La fameuse bulle magique qui va glisser -->
+
                 <div class="nav-indicator"></div>
 
                 <li><a href="#accueil">Demoreel</a></li>
-                <li><a href="#projets">Projets</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#projets">Projects</a></li>
+                <li><a href="#about">About me</a></li>
+                <li><a href="#contact">Contacts</a></li>
             </ul>
         </nav>
     </header>
@@ -30,7 +37,7 @@
     <section class="hero">
         <!-- SECTION ACCUEIL (HERO) -->
         <section id="accueil" class="hero">
-            <!-- Le contenu de ton accueil : le grand titre, le bouton play, la vidéo de fond... -->
+
         </section>
         <!-- Vidéo d'arrière-plan compressée (tourne en boucle, sans son) -->
         <video class="bg-video" autoplay muted loop playsinline>
@@ -41,10 +48,66 @@
         <div class="hero-content">
             <h1>Junior Compositing Artist</h1>
             <!-- Le bouton qui aura l'effet magnétique -->
-            <button id="play-btn" class="magnetic-btn">Lancer la Demoreel</button>
+            <button id="play-btn" class="magnetic-btn">Watch Demoreel</button>
         </div>
     </section>
+    <!-- SECTION ABOUT ME -->
+    <section id="about" class="about-section reveal">
+        <div class="about-container">
+            <h2>About me</h2>
 
+            <!-- En-tête Profil -->
+            <div class="profile-header">
+                <!-- N'oublie pas de mettre le nom de ton image ici ! -->
+                <img src="https://www.auroredelsoir.be/wp-content/uploads/2019/03/Claire_Lebe%CC%80gue_PortraitCV_3943.jpg"
+                    alt="Inès Vanthuyne" class="profile-pic">
+                <div class="profile-title">
+                    <h3>Vanthuyne Inès</h3>
+                    <p>Junior compositing artist</p>
+                </div>
+            </div>
+
+            <!-- Colonnes de texte bilingues -->
+            <div class="about-columns">
+
+                <!-- Colonne Anglais -->
+                <div class="column">
+                    <h4>English :</h4>
+                    <p>After a first two-year experience in digital art at the Académie des Beaux-Arts in Tournai, I
+                        redirected my path towards VFX, specifically compositing, at the Haute École Louvain en Hainaut
+                        (HELHa) in Mons, where I graduated.</p>
+                    <p>During my three years of VFX studies, I acquired a wide range of skills, particularly in
+                        compositing and Nuke. I also have a solid foundation in tracking, clean-up, rotoscoping, and
+                        keying.</p>
+                    <p>I am now looking for my next professional experience to expand my skills in this field.</p>
+                </div>
+
+                <!-- La ligne séparatrice verticale -->
+                <div class="divider"></div>
+
+                <!-- Colonne Français -->
+                <div class="column">
+                    <h4>Français :</h4>
+                    <p>Après une première expérience de deux ans en art numérique à l'Académie des Beaux-Arts de
+                        Tournai, je me suis réorientée vers les VFX et plus spécialement le compositing à la Haute École
+                        Louvain en Hainaut de Mons où j'ai été diplômée.</p>
+                    <p>Durant mes trois années d'étude en VFX, j'ai pu acquérir un large éventail de compétences,
+                        notamment en compositing ainsi que sur Nuke. J'ai également de solides bases en tracking,
+                        clean-up, rotoscopie et keying.</p>
+                    <p>Je cherche maintenant ma prochaine expérience professionnelle afin d'élargir mes compétences dans
+                        ce domaine.</p>
+                </div>
+
+            </div>
+            <!-- Le bouton CV centré sous les deux langues -->
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="CV_Ines_Vanthuyne.pdf" target="_blank" class="magnetic-btn about-btn">Download / Télécharger
+                    CV</a>
+            </div>
+
+        </div>
+        </div>
+    </section>
     <!-- MODALE DU LECTEUR VIDÉO (Cachée par défaut) -->
     <div id="video-modal" class="modal">
         <div class="modal-content">
@@ -67,7 +130,7 @@
 
     <!-- SECTION PROJETS -->
     <section id="projets" class="projets-section reveal">
-        <h2>Mes Projets</h2>
+        <h2>My Projects</h2>
         <div class="grille-projets">
             <!-- Projet 1 -->
             <div class="projet-miniature">
@@ -105,26 +168,25 @@
     <!-- SECTION CONTACT (FOOTER) -->
     <footer id="contact" class="contact-section reveal">
         <div class="contact-container">
-            <h2>Travaillons ensemble</h2>
-            <p>Disponible pour de nouveaux projets et collaborations.</p>
+            <h2>Let's work together</h2>
+            <p>Available for new projects and collaborations.</p>
 
             <div class="contact-links">
                 <!-- Le lien mailto: ouvrira directement la messagerie du visiteur -->
-                <a href="mailto:ton.email@exemple.com" class="contact-btn">Envoyer un Email</a>
+                <a href="mailto:inesvth@hotmail.com" class="contact-btn">Send an Email</a>
             </div>
 
             <div class="social-links">
-                <a href="#">Facebook</a>
                 <a href="#">LinkedIn</a>
                 <a href="#">Instagram</a>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 Ines Vanthuyne. Tous droits réservés.</p>
+            <p>© 2026 Ines Vanthuyne. All rights reserved.</p>
         </div>
     </footer>
-    <!-- Nous lierons notre fichier JavaScript ici plus tard -->
+
     <script src="script.js"></script>
 </body>
 

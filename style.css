@@ -24,7 +24,10 @@ html {
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -88,10 +91,11 @@ nav a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    padding: 8px 20px;
+    padding: 8px 10px;
     /* On donne de l'espace autour du texte pour que la bulle soit jolie */
     border-radius: 50px;
     transition: color 0.3s ease;
+    font-size: 1.3rem;
 }
 
 nav a:hover {
@@ -180,6 +184,97 @@ nav a:hover {
     background: var(--gradient-hover);
     /* Ajout d'une ombre mauve subtile au survol pour accentuer l'effet lumineux */
     box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+
+/* --- SECTION ABOUT ME --- */
+.about-section {
+    position: relative;
+    z-index: 2;
+    background-color: var(--bg-color);
+    padding: 100px 50px;
+    max-width: 1000px;
+    /* On réduit un peu la largeur pour centrer le texte proprement */
+    margin: 0 auto;
+}
+
+.about-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: left;
+    /* Aligné à gauche comme sur ta maquette */
+}
+
+/* Ajustement de la taille du bouton CV */
+.about-btn {
+    font-size: 1rem;
+    padding: 12px 35px;
+    letter-spacing: 1px;
+}
+
+/* En-tête avec photo et nom */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+.profile-pic {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    /* Rend l'image parfaitement ronde */
+    object-fit: cover;
+    /* Petit effet premium autour de la photo */
+    box-shadow: 0 0 20px rgba(192, 132, 252, 0.2);
+}
+
+.profile-title h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.profile-title p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Les deux colonnes de texte */
+.about-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    /* L'espace entre le texte et la ligne du milieu */
+}
+
+.column {
+    flex: 1;
+    /* Les deux colonnes prennent exactement la même largeur */
+}
+
+.column h4 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.column p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: #e0e0e0;
+    line-height: 1.7;
+}
+
+/* La ligne de séparation au milieu */
+.divider {
+    width: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    /* Ligne blanche */
+    border-radius: 2px;
+    margin-top: 10px;
+    /* Aligne la ligne avec le texte */
 }
 
 /* --- SECTION PROJETS (Grille et Zoom) --- */
@@ -425,8 +520,6 @@ nav a:hover {
 /* Liens des réseaux sociaux */
 .social-links {
     margin-top: 50px;
-    display: flex;
-    justify-content: center;
     gap: 30px;
 }
 
@@ -435,6 +528,7 @@ nav a:hover {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
+    margin: 0 10px;
 }
 
 .social-links a:hover {
@@ -465,10 +559,6 @@ nav a:hover {
     /* Remonte à sa position normale */
 }
 
-/* =========================================
-   RESPONSIVE DESIGN (Mobiles & Tablettes)
-   ========================================= */
-
 /* --- TABLETTES ET PETITS ÉCRANS (Moins de 768px) --- */
 @media screen and (max-width: 768px) {
 
@@ -484,12 +574,14 @@ nav a:hover {
     }
 
     nav ul {
-        gap: 15px;
-        /* Rapproche les liens du menu */
+        gap: 10px;
+        /* Corrigé : espacement défini */
     }
 
     nav a {
-        font-size: 0.9rem;
+        font-size: 1rem;
+        margin: 0;
+        /* Corrigé : marge définie */
     }
 
     /* Le Titre : on réduit la taille de la police pour éviter que ça coupe */
@@ -498,21 +590,9 @@ nav a:hover {
         padding: 0 15px;
     }
 
-    /* Section Projets : on réduit l'espacement global */
-    .projets-section {
-        padding: 60px 20px;
-    }
-
-    .projets-section h2 {
-        font-size: 2rem;
-        text-align: center;
-        /* Plus esthétique centré sur mobile */
-    }
-
     /* Modale et Vidéo : on ajuste les contrôles et le bouton fermer */
     .close-btn {
         top: -30px;
-        /* On le rapproche pour éviter qu'il sorte de l'écran */
         right: 10px;
     }
 
@@ -522,7 +602,32 @@ nav a:hover {
         padding: 10px 15px;
     }
 
-    /* Ajustements du Footer pour Mobile */
+    /* Ajustements de la section About pour Mobile */
+    .about-section {
+        padding: 60px 20px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        /* Empile la photo et le texte */
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .about-columns {
+        flex-direction: column;
+        /* Empile l'anglais et le français */
+        gap: 30px;
+    }
+
+    .divider {
+        width: 100%;
+        /* La ligne devient horizontale sur mobile */
+        height: 2px;
+        margin: 10px 0;
+    }
+
+    /* Ajustements du Footer (Contact) pour Mobile */
     .contact-section {
         padding: 60px 20px 30px;
     }
@@ -533,11 +638,19 @@ nav a:hover {
 
     .social-links {
         flex-direction: column;
-        /* Empile les liens Vimeo, LinkedIn, etc. */
         gap: 15px;
     }
 
-    /* Ajustements des grosses sections pour Mobile */
+    /* Ajustements des grosses sections (Projets et Contact) pour Mobile */
+    .projets-section {
+        padding: 60px 20px;
+    }
+
+    .projets-section h2 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
     .projets-section,
     .contact-section {
         border-top-left-radius: 40px;
