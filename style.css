@@ -26,7 +26,7 @@ html {
 body {
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
-    font-weight: <weight>;
+    font-weight: 400;
     font-style: normal;
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -134,17 +134,16 @@ nav a:hover {
     overflow: hidden;
 }
 
+/* --- ARRIÈRE-PLAN VIDÉO LOCAL --- */
 .bg-video {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: -2;
-    object-fit: cover;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Force la vidéo à remplir tout l'écran sans se déformer */
+    z-index: -2; /* Pousse la vidéo tout au fond, derrière le texte */
+    pointer-events: none; /* Empêche de cliquer sur la vidéo par erreur */
 }
 
 /* Le voile assombri sur la vidéo d'arrière-plan */
@@ -168,7 +167,6 @@ nav a:hover {
 .magnetic-btn {
     padding: 15px 40px;
     font-size: 1.2rem;
-    /* On remplace la couleur unie par le dégradé */
     background: var(--gradient-primary);
     color: white;
     border: none;
@@ -176,6 +174,7 @@ nav a:hover {
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
+    text-decoration: none; /* La ligne magique pour enlever le soulignement */
     transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s;
     display: inline-block;
 }
@@ -201,7 +200,6 @@ nav a:hover {
     font-size: 2.5rem;
     margin-bottom: 40px;
     text-align: left;
-    /* Aligné à gauche comme sur ta maquette */
 }
 
 /* Ajustement de la taille du bouton CV */
@@ -223,9 +221,7 @@ nav a:hover {
     width: 130px;
     height: 130px;
     border-radius: 50%;
-    /* Rend l'image parfaitement ronde */
     object-fit: cover;
-    /* Petit effet premium autour de la photo */
     box-shadow: 0 0 20px rgba(192, 132, 252, 0.2);
 }
 
@@ -246,12 +242,10 @@ nav a:hover {
     display: flex;
     justify-content: space-between;
     gap: 40px;
-    /* L'espace entre le texte et la ligne du milieu */
 }
 
 .column {
     flex: 1;
-    /* Les deux colonnes prennent exactement la même largeur */
 }
 
 .column h4 {
@@ -271,63 +265,45 @@ nav a:hover {
 .divider {
     width: 2px;
     background: rgba(255, 255, 255, 0.8);
-    /* Ligne blanche */
     border-radius: 2px;
     margin-top: 10px;
-    /* Aligne la ligne avec le texte */
 }
 
 /* --- SECTION PROJETS (Grille et Zoom) --- */
 .projets-section {
     position: relative;
     z-index: 2;
-    /* S'assure que la section passe par-dessus la vidéo */
-
-    /* Le secret : on remonte la section sur le bas de l'accueil */
     margin-top: -100px;
-
-    /* Les angles ronds géants façon application moderne */
     border-top-left-radius: 80px;
     border-top-right-radius: 80px;
-
-    /* Un fond plein pour cacher la vidéo qui passe en dessous */
     background-color: var(--bg-color);
-
-    /* Une ombre géante projetée vers le haut pour détacher la plaque */
     box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.8);
-
-    /* Un liseré lumineux très fin sur le bord supérieur pour le côté premium */
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-
-    /* On augmente le padding haut pour que le contenu respire sous cet arrondi */
     padding: 120px 50px 80px;
     max-width: 100%;
-    /* S'assure que la plaque touche les bords de l'écran */
 }
 
 .projets-section h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
     text-align: center;
-    /* Cette ligne centre ton titre */
 }
 
 .grille-projets {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
 }
 
 .projet-miniature {
+    flex: 0 1 300px;
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-
-    /* Le changement clé : on passe sur un format vertical beaucoup plus haut */
     aspect-ratio: 3 / 4;
-
     cursor: pointer;
     background: #111;
 }
@@ -335,18 +311,12 @@ nav a:hover {
 .projet-miniature img {
     width: 100%;
     height: 100%;
-
-    /* On force l'image à remplir cette nouvelle grande boîte verticale */
     object-fit: cover;
     display: block;
     padding: 0;
-    /* On retire les marges du test précédent */
-
     filter: brightness(0.8);
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
 }
-
-
 
 .projet-miniature h3 {
     position: absolute;
@@ -358,7 +328,6 @@ nav a:hover {
     transition: opacity 0.3s ease;
 }
 
-/* L'effet au survol ! */
 .projet-miniature:hover img {
     transform: scale(1.05);
     filter: brightness(1);
@@ -371,7 +340,6 @@ nav a:hover {
 /* --- MODALE LECTEUR VIDÉO --- */
 .modal {
     display: none;
-    /* Masqué par défaut, le JS gérera l'affichage */
     position: fixed;
     top: 0;
     left: 0;
@@ -383,7 +351,6 @@ nav a:hover {
     justify-content: center;
 }
 
-/* Classe ajoutée par JS pour afficher la modale */
 .modal.active {
     display: flex;
 }
@@ -410,10 +377,8 @@ nav a:hover {
     width: 100%;
     background: #000;
     border-radius: 24px;
-    /* Angles beaucoup plus ronds (au lieu de 8px) */
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-    /* Ajoute une belle ombre pour détacher le lecteur */
 }
 
 #main-demoreel {
@@ -445,10 +410,8 @@ nav a:hover {
 .progress-bar-container {
     flex-grow: 1;
     height: 8px;
-    /* Un poil plus épaisse pour que l'arrondi se voie bien */
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50px;
-    /* Totalement ronde */
     cursor: pointer;
 }
 
@@ -457,26 +420,16 @@ nav a:hover {
     width: 0%;
     background: var(--gradient-primary);
     border-radius: 50px;
-    /* Totalement ronde */
 }
-
 
 /* --- SECTION CONTACT (FOOTER) --- */
 .contact-section {
     position: relative;
     z-index: 2;
-
-    /* Même logique : on sépare nettement la section avec un fond légèrement différent */
     background: #08060a;
-
-    /* Arrondis massifs en haut également */
     border-top-left-radius: 80px;
     border-top-right-radius: 80px;
-
-    /* On la détache de la section projet avec un léger espace inversé si besoin, 
-       ou on la laisse simplement empilée. Ici on l'empile avec une ligne douce. */
     border-top: 1px solid rgba(192, 132, 252, 0.1);
-    /* Liseré mauve très subtil */
     padding: 100px 50px 40px;
     text-align: center;
 }
@@ -492,7 +445,6 @@ nav a:hover {
     font-size: 1.1rem;
 }
 
-/* Bouton Contact avec effet Liquid Glass Mauve */
 .contact-btn {
     display: inline-block;
     padding: 15px 40px;
@@ -502,7 +454,6 @@ nav a:hover {
     border-radius: 50px;
     font-weight: bold;
     transition: transform 0.3s ease, background 0.3s, box-shadow 0.3s;
-
     background: rgba(192, 132, 252, 0.15);
     backdrop-filter: blur(12px) saturate(150%);
     -webkit-backdrop-filter: blur(12px) saturate(150%);
@@ -511,13 +462,10 @@ nav a:hover {
 
 .contact-btn:hover {
     transform: translateY(-5px);
-    /* Léger bond au survol */
     background: rgba(192, 132, 252, 0.3);
     box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
-    /* Halo mauve */
 }
 
-/* Liens des réseaux sociaux */
 .social-links {
     margin-top: 50px;
     gap: 30px;
@@ -533,10 +481,8 @@ nav a:hover {
 
 .social-links a:hover {
     color: #c084fc;
-    /* Devient mauve clair au survol */
 }
 
-/* Copyright en bas de page */
 .footer-bottom {
     margin-top: 60px;
     padding-top: 20px;
@@ -545,24 +491,19 @@ nav a:hover {
     color: #666;
 }
 
-/* Classes pour l'animation au défilement */
 .reveal {
     opacity: 0;
     transform: translateY(60px);
-    /* Décalé de 60px vers le bas au départ */
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
-    /* Remonte à sa position normale */
 }
 
 /* --- TABLETTES ET PETITS ÉCRANS (Moins de 768px) --- */
 @media screen and (max-width: 768px) {
-
-    /* Le Header : on réduit les marges et on ajuste la bulle en verre */
     header {
         width: 95%;
         padding: 10px 20px;
@@ -575,22 +516,18 @@ nav a:hover {
 
     nav ul {
         gap: 10px;
-        /* Corrigé : espacement défini */
     }
 
     nav a {
         font-size: 1rem;
         margin: 0;
-        /* Corrigé : marge définie */
     }
 
-    /* Le Titre : on réduit la taille de la police pour éviter que ça coupe */
     .hero-content h1 {
         font-size: 2.8rem;
         padding: 0 15px;
     }
 
-    /* Modale et Vidéo : on ajuste les contrôles et le bouton fermer */
     .close-btn {
         top: -30px;
         right: 10px;
@@ -602,32 +539,27 @@ nav a:hover {
         padding: 10px 15px;
     }
 
-    /* Ajustements de la section About pour Mobile */
     .about-section {
         padding: 60px 20px;
     }
 
     .profile-header {
         flex-direction: column;
-        /* Empile la photo et le texte */
         align-items: flex-start;
         gap: 15px;
     }
 
     .about-columns {
         flex-direction: column;
-        /* Empile l'anglais et le français */
         gap: 30px;
     }
 
     .divider {
         width: 100%;
-        /* La ligne devient horizontale sur mobile */
         height: 2px;
         margin: 10px 0;
     }
 
-    /* Ajustements du Footer (Contact) pour Mobile */
     .contact-section {
         padding: 60px 20px 30px;
     }
@@ -641,7 +573,6 @@ nav a:hover {
         gap: 15px;
     }
 
-    /* Ajustements des grosses sections (Projets et Contact) pour Mobile */
     .projets-section {
         padding: 60px 20px;
     }
@@ -657,42 +588,29 @@ nav a:hover {
         border-top-right-radius: 40px;
         padding-top: 80px;
         margin-top: -60px;
-        /* On remonte un peu moins sur mobile */
     }
 }
 
 /* --- TÉLÉPHONES PORTABLES (Moins de 480px) --- */
 @media screen and (max-width: 480px) {
-
-    /* Le Header : l'écran est très étroit, on empile le logo et les liens */
     header {
         flex-direction: column;
         gap: 10px;
         padding: 15px;
         border-radius: 24px;
-        /* On réduit un peu l'arrondi vu que la bulle est plus haute */
     }
 
-    /* Le Titre : encore plus petit pour les smartphones */
     .hero-content h1 {
         font-size: 2rem;
     }
 
-    /* Le Bouton Play : on réduit un peu le bouton magnétique */
     .magnetic-btn {
         padding: 12px 30px;
         font-size: 1rem;
     }
 
-    /* On s'assure que la grille passe bien sur une seule colonne */
-    .grille-projets {
-        grid-template-columns: 1fr;
-    }
-
-    /* La barre de contrôle de la vidéo sur mobile */
     .custom-controls {
         flex-direction: column;
-        /* On met le bouton play au-dessus de la barre de progression */
         gap: 8px;
         border-radius: 20px;
     }
